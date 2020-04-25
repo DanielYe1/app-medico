@@ -62,6 +62,19 @@ public class Medico {
         this.dataDeNascimento = dataDeNascimento;
     }
 
+    @Override
+    public String toString() {
+        return "Medico{" +
+                "id='" + id + '\'' +
+                ", login='" + login + '\'' +
+                ", senha='" + senha + '\'' +
+                ", nome='" + nome + '\'' +
+                ", crm='" + crm + '\'' +
+                ", especialidade='" + especialidade + '\'' +
+                ", dataDeNascimento='" + dataDeNascimento + '\'' +
+                '}';
+    }
+
     public Medico(String login, String senha, String nome, String crm, String especialidade, String dataDeNascimento) {
         this.login = login;
         this.senha = senha;

@@ -1,5 +1,6 @@
 package com.example.medico.service;
 
+import com.example.medico.messaging.MedicoSender;
 import com.example.medico.model.Medico;
 import com.example.medico.repository.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,19 @@ public class MedicoService {
     @Autowired
     MedicoRepository medicoRepository;
 
+    @Autowired
+    MedicoSender medicoSender;
+
     public Medico add(Medico medico){
-        return medicoRepository.insert(medico);
+        Medico inserted = medicoRepository.insert(medico);
+        medicoSender.send(inserted.toString());
+        return inserted;
     }
 
     public boolean delete(String id) {
         boolean exists = medicoRepository.existsById(id);
         if (exists) {
+            medicoSender.send(id);
             medicoRepository.deleteById(id);
         }
         return exists;
@@ -31,6 +38,8 @@ public class MedicoService {
         if (exists) {
             medico.setId(id);
             medicoRepository.save(medico);
+            medicoSender.send(medico.toString());
+
         }
         return exists;
     }
