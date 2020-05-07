@@ -2,6 +2,7 @@ package com.example.medico.service;
 
 import com.example.medico.messaging.MedicoSender;
 import com.example.medico.model.Medico;
+import com.example.medico.model.MedicoWrapper;
 import com.example.medico.repository.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,16 +19,16 @@ public class MedicoService {
     @Autowired
     MedicoSender medicoSender;
 
-    public Medico add(Medico medico){
+    public Medico add(Medico medico) {
         Medico inserted = medicoRepository.insert(medico);
-        medicoSender.send(inserted.toString());
+        medicoSender.send(new MedicoWrapper("create", inserted));
         return inserted;
     }
 
     public boolean delete(String id) {
         boolean exists = medicoRepository.existsById(id);
         if (exists) {
-            medicoSender.send("delete" + id);
+            medicoSender.send(new MedicoWrapper("delete", new Medico(id)));
             medicoRepository.deleteById(id);
         }
         return exists;
@@ -38,7 +39,7 @@ public class MedicoService {
         if (exists) {
             medico.setId(id);
             medicoRepository.save(medico);
-            medicoSender.send(medico);
+            medicoSender.send(new MedicoWrapper("update", medico));
         }
         return exists;
     }
@@ -47,7 +48,7 @@ public class MedicoService {
         return medicoRepository.findById(id);
     }
 
-    public List<Medico> findAll(){
+    public List<Medico> findAll() {
         return medicoRepository.findAll();
     }
 

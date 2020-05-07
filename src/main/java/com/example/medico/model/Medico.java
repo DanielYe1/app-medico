@@ -1,13 +1,17 @@
 package com.example.medico.model;
 
-
 import org.springframework.data.annotation.Id;
-
 import java.io.Serializable;
 
 public class Medico implements Serializable {
     @Id
     private String id;
+    private String login;
+    private String senha;
+    private String nome;
+    private String crm;
+    private String especialidade;
+    private String dataDeNascimento;
 
     public String getId() {
         return id;
@@ -16,13 +20,6 @@ public class Medico implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
-
-    private String login;
-    private String senha;
-    private String nome;
-    private String crm;
-    private String especialidade;
-    private String dataDeNascimento;
 
     public String getSenha() {
         return senha;
@@ -64,19 +61,6 @@ public class Medico implements Serializable {
         this.dataDeNascimento = dataDeNascimento;
     }
 
-    @Override
-    public String toString() {
-        return "Medico{" +
-                "id='" + id + '\'' +
-                ", login='" + login + '\'' +
-                ", senha='" + senha + '\'' +
-                ", nome='" + nome + '\'' +
-                ", crm='" + crm + '\'' +
-                ", especialidade='" + especialidade + '\'' +
-                ", dataDeNascimento='" + dataDeNascimento + '\'' +
-                '}';
-    }
-
     public Medico(String login, String senha, String nome, String crm, String especialidade, String dataDeNascimento) {
         this.login = login;
         this.senha = senha;
@@ -84,5 +68,9 @@ public class Medico implements Serializable {
         this.crm = crm;
         this.especialidade = especialidade;
         this.dataDeNascimento = dataDeNascimento;
+    }
+
+    public Medico(String id) {
+        this.id = id;
     }
 }
