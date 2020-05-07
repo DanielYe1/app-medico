@@ -13,7 +13,7 @@ public class MedicoSender {
     @Autowired
     private Queue queue;
 
-    public void send(String order) {
+    public void send(Object order) {
         rabbitTemplate.convertAndSend(this.queue.getName(), order);
     }
 }

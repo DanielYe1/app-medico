@@ -27,7 +27,7 @@ public class MedicoService {
     public boolean delete(String id) {
         boolean exists = medicoRepository.existsById(id);
         if (exists) {
-            medicoSender.send(id);
+            medicoSender.send("delete" + id);
             medicoRepository.deleteById(id);
         }
         return exists;
@@ -38,8 +38,7 @@ public class MedicoService {
         if (exists) {
             medico.setId(id);
             medicoRepository.save(medico);
-            medicoSender.send(medico.toString());
-
+            medicoSender.send(medico);
         }
         return exists;
     }
