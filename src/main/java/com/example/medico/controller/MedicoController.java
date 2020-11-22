@@ -5,13 +5,11 @@ import com.example.medico.service.MedicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/medico")
 public class MedicoController {
 
@@ -24,7 +22,7 @@ public class MedicoController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity saveMedico(@Valid Medico medico) {
+    public ResponseEntity saveMedico(@RequestBody Medico medico) {
         Medico added = service.add(medico);
         return new ResponseEntity(HttpStatus.CREATED);
     }
