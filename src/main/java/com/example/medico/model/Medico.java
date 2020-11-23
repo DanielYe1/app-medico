@@ -78,6 +78,8 @@ public class Medico implements Serializable {
         this.dataDeNascimento = dataDeNascimento;
     }
 
+    public Medico(){}
+
      public Medico(String id) {
         this.id = id;
     }
